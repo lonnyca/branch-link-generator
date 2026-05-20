@@ -1,8 +1,7 @@
 {
  "environments": {
-	 "prod": "southwest.com",
-	 "qa5": "southwest.qa5.southwest.com",
-     "qa3": "southwest.qa3.southwest.com"
+	 "prod": "www.southwest.com",
+	 "qa5": "southwest.qa5.southwest.com"
  },
 
   "schemas": {
