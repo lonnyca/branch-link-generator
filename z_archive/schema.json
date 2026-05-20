@@ -1,0 +1,52 @@
+{
+  "schemas": {
+    "preTrip": {
+      "RR_NUMBER": "<%=preTrip.sha1RRNum%>",
+      "RSD": "<%=preTrip.recipient.segment_Assigned%>",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=preTrip.shaEmail%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+    "emailAddress": {
+      "RR_NUMBER": "<%=emailAddress.sha1RRNum%>",
+      "RSD": "<%=emailAddress.recipient.segment_Assigned%>",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=emailAddress.sha256EmailAddress%>",
+      "mi_u": "<%=emailAddress.id%>",
+      "mi_ecmp": "<%=delivery.deliveryCode%>"
+    },
+    "rt": {
+      "RR_NUMBER": "0",
+      "RSD": "0000",
+      "RMID": "<%=rtEvent.type%>",
+      "RRID": "<%=digestStrSha256(rtEvent.email)%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+	  "notification": {
+      "RR_NUMBER": "0",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=digestStrSha256(notificationEmail.emailAddress)%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+	 "productWelcome": {
+      "RR_NUMBER": "<%=productWelcome.sha1RRNum%>",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=productWelcome.sha256EmailAddress%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+	 "claimYourPoints": {
+      "RR_NUMBER": "0",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=claimYourPoints.sha256EmailAddress%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    }
+  }
+}

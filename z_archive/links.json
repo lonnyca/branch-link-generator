@@ -1,0 +1,43 @@
+{
+  "links": [
+    {
+      "id": "flight-status",
+      "label": "flight status",
+      "basePath": "/air/flight-status",
+      "schema": "preTrip",
+      "searchToken": false,
+      "params": [
+                  { "key": "clk", "value": "PRETRIP_HDR_FLTSTATUS", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "originationAirportCode", "value": "<%=preTrip.orig_Arpt_Cde%>", "dynamic": true, "encode": false, "position": "default" }
+                ]
+    },
+    {
+      "id": "book-a-flight",
+      "label": "book a flight",
+      "basePath": "/air/booking",
+      "schema": "emailAddress",
+      "searchToken": false,
+      "params": [
+                  { "key": "clk", "value": "BAF_MEMBER", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "adultPassengersCount", "value": "2", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "departureDate", "value": "2024-06-01", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "destinationAirportCode", "value": "AUS", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "fareType", "value": "USD", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "tripType", "value": "oneway", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "promoCode", "value": "SAVE25NOW", "dynamic": false, "encode": true, "position": "default" }
+                ]
+    },
+    {
+      "id": "priority-boarding",
+      "label": "priority boarding",
+      "basePath": "/air/priority-boarding/",
+      "schema": "rt",
+      "searchToken": true,
+      "params": [
+		          { "key": "searchToken", "value": "<%=ctx.ccsAdobeEmailFulfillment.emailMessages.emailMessage.airPurchase.other.seatLink%>", "dynamic": true, "encode": false, "position": "first" },
+                  { "key": "clk", "value": "PRIORITYBOARDING", "dynamic": false, "encode": true, "position": "default" }
+
+                ]
+    }  
+  ]
+}

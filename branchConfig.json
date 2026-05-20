@@ -1,0 +1,122 @@
+{
+ "environments": {
+	 "prod": "southwest.com",
+	 "qa5": "southwest.qa5.southwest.com",
+     "qa3": "southwest.qa3.southwest.com"
+ },
+
+  "schemas": {
+    "preTrip": {
+      "RR_NUMBER": "<%=preTrip.sha1RRNum%>",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=preTrip.shaEmail%>",
+      "src": "<%=delivery.batchSourceCode%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+    "emailAddress": {
+      "RR_NUMBER": "<%=emailAddress.sha1RRNum%>",
+      "src": "<%=delivery.batchSourceCode%>",
+      "RSD": "<%=emailAddress.recipient.segment_Assigned%>",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=emailAddress.sha256EmailAddress%>",
+      "mi_u": "<%=emailAddress.id%>",
+      "mi_ecmp": "<%=delivery.deliveryCode%>"
+    },
+"rt": {
+  "RSD": "0000",
+  "RMID": "<%=rtEvent.type%>",
+  "src": "<%=variables.c_campaign%>",
+  "RRID": "<%=digestStrSha256(rtEvent.email)%>",
+  "RR_NUMBER": "0",
+  "mi_u": null,
+  "mi_ecmp": null
+},
+	  "notification": {
+      "RR_NUMBER": "0",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=digestStrSha256(notificationEmail.emailAddress)%>",
+      "src": "<%=delivery.batchSourceCode%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+	 "productWelcome": {
+      "RR_NUMBER": "<%=productWelcome.sha1RRNum%>",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=productWelcome.sha256EmailAddress%>",
+      "src": "<%=delivery.batchSourceCode%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+	 "claimYourPoints": {
+      "RR_NUMBER": "0",
+      "RSD": "0000",
+      "RMID": "<%=delivery.deliveryCode%>",
+      "RRID": "<%=claimYourPoints.sha256EmailAddress%>",
+      "src": "<%=delivery.batchSourceCode%>",
+      "mi_u": null,
+      "mi_ecmp": null
+    },
+    "gtwyPretrip": {
+  "RR_NUMBER": "<%=gtwyPretrip.sha1RRNum%>",
+  "RSD": "0000",
+  "RMID": "<%=delivery.deliveryCode%>",
+  "RRID": "<%=gtwyPretrip.shaEmail%>",
+  "src": "<%=delivery.batchSourceCode%>",
+  "mi_u": null,
+  "mi_ecmp": null
+}
+  },
+
+
+  "links": [
+    {
+      "id": "flight-status",
+      "label": "flight status",
+      "basePath": "/air/flight-status/",
+      "searchToken": false,
+      "params": [
+                  { "key": "clk", "value": "PRETRIP_HDR_FLTSTATUS", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "originationAirportCode", "value": "<%=preTrip.orig_Arpt_Cde%>", "dynamic": true, "encode": false, "position": "default" }
+                ]
+    },
+    {
+      "id": "book-a-flight",
+      "label": "book a flight",
+      "basePath": "/air/booking",
+      "searchToken": false,
+      "params": [
+                  { "key": "clk", "value": "BAF_MEMBER", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "adultPassengersCount", "value": "2", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "departureDate", "value": "2024-06-01", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "destinationAirportCode", "value": "AUS", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "fareType", "value": "USD", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "tripType", "value": "oneway", "dynamic": false, "encode": true, "position": "default" },
+                  { "key": "promoCode", "value": "SAVE25NOW", "dynamic": false, "encode": true, "position": "default" }
+                ]
+    },
+    {
+      "id": "priority-boarding",
+      "label": "priority boarding",
+      "basePath": "/air/priority-boarding/",
+      "searchToken": true,
+      "params": [
+		          { "key": "searchToken", "value": "<%=ctx.ccsAdobeEmailFulfillment.emailMessages.emailMessage.airPurchase.other.seatLink%>", "dynamic": true, "encode": false, "position": "first" },
+                  { "key": "clk", "value": "PRIORITYBOARDING", "dynamic": false, "encode": true, "position": "default" }
+
+                ]
+    },
+    {
+  "id": "my-account",
+  "label": "My account",
+  "basePath": "/loyalty/myaccount/index.html",
+  "searchToken": false,
+  "params": [
+    { "key": "clk", "value": "", "dynamic": false, "encode": true, "position": "default" }
+  ]
+} 
+  ]
+}
