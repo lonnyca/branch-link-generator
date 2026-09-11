@@ -125,14 +125,12 @@
   {
     "id": "air-manage-reservation",
     "basePath": "/air/manage-reservation/",
-    "searchToken": false,
+    "searchToken": true,
     "params": [
-      {
-        "key": "clk",
-        "value": "",
-        "position": "default"
-      }
-    ]
+		          { "key": "searchToken", "value": "", "position": "first" },
+                  { "key": "clk", "value": "", "position": "default" }
+
+                ]
   },
   {
     "id": "air-seat",
