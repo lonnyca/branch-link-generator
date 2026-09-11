@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Southwest Airlines</title>
+<style type="text/css">
+a[x-apple-data-detectors] {
+	color: #304CB2 !important;
+	font-size: inherit !important;
+	font-family: inherit !important;
+	font-weight: inherit !important;
+	line-height: inherit !important;
+}
+u + #body a {
+	color: #304CB2 !important;
+	font-size: inherit !important;
+	font-family: inherit !important;
+	font-weight: inherit !important;
+	line-height: inherit !important;
+}
+#MessageViewBody a {
+	color: #304CB2 !important;
+	font-size: inherit !important;
+	font-family: inherit !important;
+	font-weight: inherit !important;
+	line-height: inherit !important;
+}
+<%@ include view="swaPB_SEC_CSS_Normalize" %> /* Media Queries */
+<%@ include view='swaPB_SEC_CSS_TabletMediaQueries' %> @media screen and (max-width: 600px) {
+<%@ include view="swaPB_BATCH_CSS_MobileMediaQueries" %> <%@ include view="swaPB_SEC_CSS_ADDITIONALMediaQueries" %> /* === Custom Media Queries === */
+.hide-mobile {
+display: none !important;
+}
+.show-mobile {
+display: inline-block !important;
+}
+	
+/* Passenger section - mobile medium/large (430px) */
+@media screen and (max-width: 430px) {
+.pax-right {
+width: 55% !important;
+}
+.pax-left {
+width: 45% !important;
+}
+.seat-text {
+font-size: 12px !important;
+}
+}
+
+/* Passenger section - mobile small (320px) */
+@media screen and (max-width: 320px) {
+.pax-right {
+width: 60% !important;
+}
+.pax-left {
+width: 40% !important;
+}
+}
+}
+</style>
+</head>
+<script>
+    <%@ include view='swaPB_Global_Variables' %>
+    <%@ include view='swaEncodedFieldsOptions' %>
+    <%@ include view='swaViewCommonNumberFormat' %>
+    <%@ include view='swaViewCommonStringSmartCase' %>
+	<%@ include view='swaViewRTItineraryFunctions' %>		
+</script>
+<body style="background-color: #FFFFFF; text-size-adjust: 100%; margin: 0 !important; padding: 0 !important; height: 100% !important;">
+<!-- start: variables & scripts -->
+<%
+var msgDetail = ctx.ccsAdobeEmailFulfillment.emailMessages.emailMessage.messageDetail;
+var seg = msgDetail.itinerary.onds.ond.segments.segment; 
+   
+var paxPNR = msgDetail.pnr;
+var travelDuration = msgDetail.itinerary.onds.ond.travelDuration;
+var departDate = date_DayAndDate(seg.departDate.toString()); 
+var flightNum = seg.flightNumber;
+var orig = seg.origin;
+var dest = seg.destination;
+var origTime = time_TimeOnly(seg.departTime.toString());
+var origMeridiem = time_MeridiemOnly(seg.departTime.toString());
+var destTime = time_TimeOnly(seg.arrivalTime.toString());
+var destMeridiem = time_MeridiemOnly(seg.arrivalTime.toString());
+
+var origArray = seg.originationStationName.toString().split(",");
+var origCity = origArray[0].toSmartCase();
+var destArray = seg.destinationStationName.toString().split(",");
+var destCity = destArray[0].toSmartCase();   
+   
+%>
+<!-- end: variables & scripts -->
+<table id="mainWrapper" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="">
+<tbody>
+  <tr>
+    <td id="mainContainer" align="center" valign="top" style="padding: 20px 0 40px 0;">
+      <table width="600" border="0" cellpadding="0" cellspacing="0" role="presentation">
+      <tbody>
+        
+        <!-- ===== start: header region ===== -->
+        <tr>
+          <td id="header" valign="top">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+            <tbody>
+              <!-- start: preheader -->
+              <tr>
+                <td class="preheader" valign="top" style="padding-bottom: 15px; border-bottom: 1px solid #CCCCCC;">
+                  <p style="color: #707070; font-size: 10px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;">Learn the details.</p>
+                  <p style="color: #304CB2; font-size: 9px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> <a _label="Preheader - View In Browser" _category="Header" _type="mirrorPage" href="<%@ include view='MirrorPageUrl' %>" style="color: #304CB2; text-decoration: none;">View in web browser</a></p>
+                </td>
+              </tr>
+              <!-- end: preheader -->
+              <%@ include view='swaRTPBAirHeader' %>
+              <!-- END Top Blocks --> 
+              
+              <!-- START MAIN EMAIL SECTION --> 
+              <!-- start: travel advisory -->
+              <tr>
+                <td valign="top">
+                  <table border="0" cellpadding="0" cellspacing="0" class="intro" role="presentation" width="100%">
+                    <tbody>
+                      <tr>
+                        <td class="container" style="padding-bottom: 10px;" valign="top">
+                          <table border="0" cellpadding="0" cellspacing="0" class="background" role="presentation" style="background-color: #FFE4D5; border: 2px solid #CC6024;" width="100%">
+                            <tbody>
+                              <tr>
+                                <th aria-hidden="true" valign="top" width="50">
+                                  <table border="0" cellpadding="0" cellspacing="0" class="column left">
+                                    <tbody>
+                                      <tr>
+                                        <td style="padding: 20px 15px 0 15px;" valign="top"> <img alt="" border="0" src="https://res18.iluv.southwest.com/res/tracking/79e3a64a54e0f3c1d9ffb1880d9504f01152b0ab86bbaea112c15e949cde861e.png" style="display: block;" width="50" /> </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </th>
+                                <th style="padding: 0; font-weight: normal;" valign="top">
+                                  <table border="0" cellpadding="0" cellspacing="0" class="column right" role="presentation" width="90%">
+                                    <tbody>
+                                      <tr>
+                                        <td style="padding: 15px 10px 15px 0;" valign="middle">
+                                          <p style="color: #653012; font-size: 20px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 10px 0;"> Travel notice</p>
+                                          <p style="color: #653012; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 10px 0;">The following change was made to your itinerary:</p>
+                                          <p style="color: #653012; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 10px 0;">New&nbsp;seat&nbsp;assignment(s)<span></p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </th>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <!-- end: travel advisory --> 
+              
+              <!-- start: Air editorial -->
+              <tr>
+                <td valign="top" style="padding-bottom: 10px;">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #FFFFFF;">
+                    <tbody>
+                      <tr>
+                        <td style="padding: 20px 15px 0 15px;">
+                          <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 20px 0;"> Hello {FNAME}, </p>
+                          <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 20px 0;">Due to unexpected circumstances, your seat assignment has changed. Please review your updated seat and travel information below. We apologize for this inconvenience.</p>
+                          <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 20px 0;">You can <a href="https://link.swa.info/d5RRYyAuMVb" style="color: #304CB2; text-decoration: underline;">manage your reservation here</a>. Please have your name and confirmation number ready. If you still need help or have questions after going online, you can call us at 1-800-IFLY-SWA<span style="font-size: 10px; line-height: 6px; vertical-align: 4px;">&reg;</span> (1-800-435-9792). Wait times to speak with someone may be high. </p>
+                          <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 20px 0;">Thank you for flying with us. We'll see you onboard soon.</p>
+                          <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 20px 0;">The Southwest<span style="font-size: 10px; line-height: 6px; vertical-align: 4px;">&reg;</span> Team </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <!-- end: Air editorial --> 
+              
+              <!-- start: travel summary -->
+              <tr>
+                <td id="TravelSummary" class="container" style="padding: 10px;" valign="top">
+                  <table class="background" style="background-color: #FFFFFF;" valign="top" width="100%">
+                    <tbody>
+                      
+                      <!-- start: row-2 (passenger summary) -->
+                      <tr class="row-2">
+                        <td valign="top" style="padding-top: 20px; border-top: 1px solid #6B6B6B;">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tbody>
+                              <tr>
+                                <td style="padding-bottom: 15px;" valign="top">
+                                  <p style="color: #111B40; font-size: 14px; font-family: Verdana, Helvetica, sans-serif; text-align: left; Margin: 0 0 3px 0;"> Confirmation # <span style="color: #008522; font-size: 32px;"><strong><%= paxPNR %></strong></span> </p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- end: row-2 (passenger summary) --> 
+                      <!-- START LOOP: iterate through each individual passenger in PNR --> 
+                      <% 
+							var paxIndex = 0;
+							for each (var pax in ctx.ccsAdobeEmailFulfillment.emailMessages.emailMessage.messageDetail.passengers.pax) { 
+								var nameArray = pax.name.toString().split(",");
+								var paxFirstName = nameArray[0].toSmartCase();
+								var paxLastName = nameArray[1].toSmartCase();
+								var rowBg = (paxIndex % 2 === 0) ? "#FFFFFF" : "#F7F7F7";
+								paxIndex++;
+							%>
+                      <tr style="background-color: <%= rowBg %>;">
+                        <td valign="top" style="padding-top: 10px;">
+                          <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                            <tbody>
+                              <tr>
+                                <td class="pax-left" valign="top" style="background-color: <%= rowBg %>;">
+                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                    <tbody>
+                                      <tr> 
+                                        <!-- left column -->
+                                        <th class="column" valign="top" style="font-weight: bold; padding: 0 15px 0 0;">
+                                          <p style="color: #6B6B6B; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"><span style="display: inline-block; white-space: nowrap;"> PASSENGER </span></p>
+                                        </th>
+                                        <!-- right column -->
+                                        <th class="column right" valign="top" style="font-weight: bold; padding: 0;">
+                                          <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> <%= paxFirstName %>&nbsp;<%= paxLastName %> </p>
+                                        </th>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                                <% for each (var ond in pax.seats.ond) { 
+										 var seatOrig = ond.seat.departureStation;
+										 var seatDest = ond.seat.arrivalStation;
+										 var seatNum = ond.seat.seatNumber;
+										 %>
+                                <td class="pax-right" width="45%" valign="top">
+                                  <table border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                      <tr>
+                                        <td width="40%" valign="top" style="padding-right: 5px;">
+                                          <p style="color: #6B6B6B; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;">SEATS</p>
+                                        </td>
+                                        <td width="35%" valign="top">
+                                          <p style="color: #304CB2; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"><a href="https://link.swa.info/qivSIFGuMVb" style="color: #304CB2;"><span style="display: inline-block; white-space: nowrap; text-decoration: underline;">Modify&nbsp;seat</span></a></p>
+                                        </td>
+                                        <td width="25%" valign="top">
+                                          <p style="color: #304CB2; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"></p>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td width="40%" valign="top">
+                                          <p class="seat-text" style="color: #6B6B6B; font-size: 14px; font-weight: normal; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"><%= seatOrig %> - <%= seatDest %></p>
+                                        </td>
+                                        <td width="35%" valign="middle">
+                                          <p style="color: #6B6B6B; font-size: 12px; font-weight: normal; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"><%= seatNum %></p>
+                                        </td>
+                                        <td width="25%" valign="middle" style="padding-left: 8px;">
+                                          <p style="font-size: 10px; font-weight: normal; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"> <span class="hide-mobile" style="display: inline-block; background-color: #FFC9AB; color: #111B40; padding: 2px 4px;">CHANGED</span> <span class="show-mobile" style="display: none; background-color: #FFC9AB; color: #111B40; padding: 2px 6px;">C</span> </p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <% } } %>
+                      <!-- END LOOP -->
+                      <tr class="row-2 group">
+                        <td style="padding: 10px 0 30px 0;" valign="top">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top: 1px solid #6B6B6B;">
+                            <tbody>
+                              <tr>
+                                <td style="padding-top: 15px;" valign="top">
+                                  <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> View your <a href="https://link.swa.info/d5RRYyAuMVb" style="color: #304CB2; text-decoration: underline;">full itinerary</a> for all passenger(s) information. </p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <!-- end: travel summary --> 
+			   <!-- start: updated flight information -->
+                    <tr>
+                      <td id="newFlight" class="container" valign="top">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                          <tbody>
+                            <tr>
+                              <td valign="top">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                  <tbody>
+                                    <tr class="row-2 group">
+                                      <td valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                          <tbody>
+                                            <tr>
+                                              <td style="padding-top: 15px;" valign="top">
+                                                <p style="color: #111B40; font-size: 24px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 3px 0;"> Your Itinerary </p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top">
+                                        <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #FFFFFF;">
+                                          <tbody>
+                                            <tr>
+                                              <td valign="top" style="padding-bottom: 10px;">
+                                                <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; Margin: 0;">If you're unable to retrieve your boarding pass, please visit our kiosk or see an agent. </p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+
+							  
+                            <tr>
+                              <td height="16" valign="middle" style="padding: 5px 15px; background-color: #111B40;"> 
+                                <p style="color: #FFFFFF; font-size: 12px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> 
+                                  <!-- departDate format: Sunday, 11/30/2020 --> 
+                                  <%= departDate %> &nbsp;&nbsp; Est.&nbsp;Travel&nbsp;Time: <span style="font-weight: bold; color: #FFFFFF"><%= flightDuration(travelDuration) %></span> </p>
+                              </td>
+                            </tr>
+                <tr>
+                  <td valign="top" style="padding: 15px;">
+                    <table align="left" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <th class="split" valign="top" style="padding: 0; font-weight: normal;" width="100">
+                            <table class="column h2" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                              <tbody>
+                                <tr>
+                                  <td valign="top" style="padding: 0 20px 10px 0;">
+                                    <p style="color: #111B40; font-size: 12px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> FLIGHT </p>
+                                    <p style="color: #111B40; font-size: 12px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0;">
+                                      <strong>
+                                      #2222</strong> </p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </th>
+                          <th class="split" valign="top" style="padding: 0; font-weight: normal;">
+                            <table class="column h3" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                              <tbody>
+                                <tr>
+                                  <td valign="top">
+                                    <p style="color: #646464; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 5px 0;"> DEPARTS </p>
+                                    <p style="color: #13247C; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 4px 0;"> <span style="font-size: 20px;"><strong><%= orig %>&nbsp;<%= origTime %></strong></span><%= origMeridiem %> </p>
+                                    <p style="color: #646464; font-size: 12px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"><%= origCity %> </p>
+                                  </td>
+                                  <td class="hide" aria-hidden="true" valign="middle" align="left" width="100"> <img src="<%= imgAdobePrefix %>ico-plane.png" alt="" width="27" border="0" style="display: block;"/> </td>
+                                  <td valign="top" class="arrival" align="left">
+                                    <p style="color: #646464; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 5px 0;"> ARRIVES </p>
+                                    <p style="color: #13247C; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 4px 0;"> <span style="font-size: 20px;"><strong><%= dest %>&nbsp;<%= destTime %></strong></span><%= destMeridiem %> </p>
+                                    <p style="color: #646464; font-size: 12px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"><%= destCity %> </p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+					  
+				                <tr>
+                  <td valign="top" style="padding: 15px;">
+                    <table align="left" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td width="74" valign="middle" style="padding-right: 15px;">
+                            <p style="color: #111B40; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> FLIGHT </p>
+                            <p style="color: #111B40; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> # 2222 </p>
+                          </td>
+                          <td width="160" valign="top" style="padding-right: 15px;">
+                            <p style="color: #646464; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 5px 0;"> DEPARTS </p>
+                            <p style="color: #13247C; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 4px 0;"> <span style="font-size: 20px;"><strong><%= orig %>&nbsp;<%= origTime %></strong></span><%= origMeridiem %> </p>
+                            <p style="color: #646464; font-size: 12px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> <%= origCity %> </p>
+                          </td>
+                          <td class="hide" aria-hidden="true" valign="middle" style="padding-right: 15px;"> <img src="<%= imgAdobePrefix %>ico-plane.png" alt="" width="27" border="0" style="display: block;"/> </td>
+                          <td width="160" valign="top" style="padding-right: 15px;">
+                            <p style="color: #646464; font-size: 14px; font-weight: bold; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 5px 0;"> ARRIVES </p>
+                            <p style="color:#13247C; font-size: 14px; font-family: <%= fontFamily %>; text-align: left; Margin: 0 0 4px 0;"> <span style="font-size: 20px;"><strong><%= dest %>&nbsp;<%= destTime %></strong></span><%= destMeridiem %> </p>
+                            <p style="color: #646464; font-size: 12px; font-family: <%= fontFamily %>; text-align: left; Margin: 0;"> <%= destCity %> </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>	  
+					  
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+				  
+                    <!-- end: updated flight information -->	  
+              
+              <!-- START Footer block -->
+              <%@ include view='swaRTPBGeneral_Footer_Block' %>
+              <!-- END Footer block --> 

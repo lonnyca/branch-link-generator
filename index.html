@@ -1,34 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Branch Link Generator</title>
-  </head>
-  <body>
-  <h1>Branch Link Generator</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branch Link Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <label for="environmentSelect">Environment:</label>
-  <select id="environmentSelect">
-    <option value="">-- Select environment --</option>
-  </select>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #304ffe;
+      --accent-light: #536dfe;
+      --text: #e8eaf6;
+      --text-muted: #7986cb;
+      --text-dim: #3d4568;
+      --success: #00e676;
+      --warning: #ffab40;
+      --font: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --radius: 8px;
+    }
 
-  <label for="schemaSelect">Schema:</label>
-  <select id="schemaSelect">
-    <option value="">-- Select schema --</option>
-  </select>
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0;
+    }
 
-  <label for="linkSelect">Link:</label>
-  <select id="linkSelect">
-    <option value="">-- Select link --</option>
-  </select>
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+    }
 
-  <div id="paramsContainer"></div>
+    .logo {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-  <button id="generateBtn">Generate</button>
+    .logo svg { width: 16px; height: 16px; fill: white; }
 
-  <div id="output"></div>
+    header h1 {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
 
-  <script src="generator.js"></script>
+    header span {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: 4px;
+      font-weight: 400;
+    }
+
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .panel-body { padding: 20px; }
+
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: none;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--accent-light);
+    }
+
+    /* Tom Select overrides */
+    .ts-wrapper { width: 100%; }
+    .ts-control {
+      background: var(--surface2) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius) !important;
+      color: var(--text) !important;
+      font-family: var(--font) !important;
+      font-size: 13px !important;
+      padding: 8px 12px !important;
+      box-shadow: none !important;
+      min-height: unset !important;
+    }
+    .ts-control input { color: var(--text) !important; font-family: var(--font) !important; font-size: 13px !important; }
+    .ts-dropdown {
+      background: var(--surface2) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius) !important;
+      font-family: var(--font) !important;
+      font-size: 13px !important;
+      color: var(--text) !important;
+    }
+    .ts-dropdown .option { padding: 8px 12px !important; color: var(--text) !important; }
+    .ts-dropdown .option:hover, .ts-dropdown .option.active { background: var(--border) !important; color: var(--text) !important; }
+    .ts-dropdown .option.selected { background: var(--accent) !important; color: white !important; }
+
+    .params-section { margin-top: 4px; }
+
+    .param-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .param-key {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--accent-light);
+      background: rgba(83, 109, 254, 0.1);
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 80px;
+      text-align: right;
+    }
+
+    .param-input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 7px 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .param-input:focus { border-color: var(--accent-light); }
+    .param-input::placeholder { color: var(--text-dim); }
+
+    .search-token-badge {
+      font-size: 10px;
+      background: rgba(255, 171, 64, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(255, 171, 64, 0.3);
+      padding: 2px 7px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .custom-url-field {
+      margin-bottom: 12px;
+    }
+
+    .generate-btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 20px;
+      letter-spacing: 0.01em;
+    }
+
+    .generate-btn:hover { background: var(--accent-light); }
+    .generate-btn:active { transform: translateY(1px); }
+
+    .output-panel { position: sticky; top: 24px; }
+
+    .output-empty {
+      padding: 48px 20px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .output-empty .icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    .output-content { padding: 20px; display: none; }
+
+    .output-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .output-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.7;
+      word-break: break-all;
+      white-space: pre-wrap;
+      min-height: 80px;
+    }
+
+    .output-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .copy-btn {
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+      flex: 1;
+    }
+
+    .copy-btn:hover { border-color: var(--accent-light); color: var(--accent-light); }
+
+    .copy-btn.copied {
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .warning-msg {
+      font-size: 12px;
+      color: var(--warning);
+      background: rgba(255, 171, 64, 0.08);
+      border: 1px solid rgba(255, 171, 64, 0.2);
+      border-radius: var(--radius);
+      padding: 8px 12px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    @media (max-width: 720px) {
+      .main { grid-template-columns: 1fr; }
+      .output-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 000 10h10a5 5 0 000-10zm0 8H7a3 3 0 010-6h10a3 3 0 010 6z"/></svg>
+  </div>
+  <h1>Branch Link Generator <span>Southwest Airlines Email</span></h1>
+</header>
+
+<div class="main">
+
+  <!-- Left panel: controls -->
+  <div class="panel">
+    <div class="panel-header">Configuration</div>
+    <div class="panel-body">
+
+      <div class="field">
+        <label for="environmentSelect">Environment</label>
+        <select id="environmentSelect">
+          <option value="">Select environment</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="schemaSelect">Schema</label>
+        <select id="schemaSelect">
+          <option value="">Select schema</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="linkSelect">Link</label>
+        <select id="linkSelect">
+          <option value="">Select link</option>
+        </select>
+      </div>
+
+      <div id="customUrlField" class="custom-url-field" style="display:none;">
+        <label for="customUrlInput">Custom canonical URL</label>
+        <input type="text" id="customUrlInput" placeholder="https://support.southwest.com/...">
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="params-section">
+        <label>Parameters</label>
+        <div id="paramsContainer">
+          <div style="font-size:12px;color:var(--text-dim);padding:8px 0;">Select a link to see parameters.</div>
+        </div>
+      </div>
+
+      <div id="clkWarning" class="warning-msg">⚠ clk is required for tracking. Generate anyway?</div>
+
+      <button class="generate-btn" id="generateBtn">Generate link</button>
+
+    </div>
+  </div>
+
+  <!-- Right panel: output -->
+  <div class="panel output-panel">
+    <div class="panel-header">Output</div>
+
+    <div id="outputEmpty" class="output-empty">
+      <div class="icon">⛓</div>
+      Configure your link and click Generate.
+    </div>
+
+    <div id="outputContent" class="output-content">
+      <div class="output-tabs">
+        <button class="tab-btn active" id="tabProd" onclick="switchTab('prod')">Production</button>
+        <button class="tab-btn" id="tabQa5" onclick="switchTab('qa5')">QA5</button>
+      </div>
+
+      <div id="outputBox" class="output-box"></div>
+
+      <div class="output-actions">
+        <button class="copy-btn" id="copyBtn" onclick="copyOutput()">Copy</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script src="generator.js"></script>
 </body>
 </html>

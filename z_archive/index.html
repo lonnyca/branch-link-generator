@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Link Generator</title>
+  </head>
+  <body>
+  <h1>Branch Link Generator</h1>
+
+  <label for="environmentSelect">Environment:</label>
+  <select id="environmentSelect">
+    <option value="">-- Select environment --</option>
+  </select>
+
+  <label for="schemaSelect">Schema:</label>
+  <select id="schemaSelect">
+    <option value="">-- Select schema --</option>
+  </select>
+
+  <label for="linkSelect">Link:</label>
+  <select id="linkSelect">
+    <option value="">-- Select link --</option>
+  </select>
+
+  <div id="paramsContainer"></div>
+
+  <button id="generateBtn">Generate</button>
+
+  <div id="output"></div>
+
+  <script src="generator.js"></script>
+</body>
+</html>

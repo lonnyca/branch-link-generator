@@ -72,50 +72,560 @@
 
 
   "links": [
-    {
-      "id": "flight-status",
-      "label": "flight status",
-      "basePath": "/air/flight-status/",
-      "searchToken": false,
-      "params": [
-                  { "key": "clk", "value": "PRETRIP_HDR_FLTSTATUS", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "originationAirportCode", "value": "<%=preTrip.orig_Arpt_Cde%>", "dynamic": true, "encode": false, "position": "default" }
+  {
+    "id": "air-booking",
+    "basePath": "/air/booking/",
+    "searchToken": false,
+    "params":  [
+                  { "key": "clk", "value": "", "position": "default" },
+                  { "key": "adultPassengersCount", "value": "2", "position": "default" },
+                  { "key": "departureDate", "value": "2024-06-01", "position": "default" },
+                  { "key": "destinationAirportCode", "value": "AUS", "position": "default" },
+                  { "key": "fareType", "value": "USD", "position": "default" },
+                  { "key": "tripType", "value": "oneway", "position": "default" },
+                  { "key": "promoCode", "value": "SAVE25NOW", "position": "default" }
                 ]
-    },
-    {
-      "id": "book-a-flight",
-      "label": "book a flight",
-      "basePath": "/air/booking",
-      "searchToken": false,
-      "params": [
-                  { "key": "clk", "value": "BAF_MEMBER", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "adultPassengersCount", "value": "2", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "departureDate", "value": "2024-06-01", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "destinationAirportCode", "value": "AUS", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "fareType", "value": "USD", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "tripType", "value": "oneway", "dynamic": false, "encode": true, "position": "default" },
-                  { "key": "promoCode", "value": "SAVE25NOW", "dynamic": false, "encode": true, "position": "default" }
+  },
+  {
+    "id": "air-check-in",
+    "basePath": "/air/check-in/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "air-flight-status",
+    "basePath": "/air/flight-status/",
+    "searchToken": false,
+    "params": [
+                  { "key": "clk", "value": "", "position": "default" },
+                  { "key": "originationAirportCode", "value": "SAN", "position": "default" },
+                  { "key": "destinationAirportCode", "value": "AUS", "position": "default" },
+                  { "key": "departureDate", "value": "2024-04-01", "position": "default" },
+                  { "key": "flightNumber", "value": "1234", "position": "default" }
                 ]
-    },
-    {
+  },
+  {
+    "id": "air-low-fare-calendar",
+    "basePath": "/air/low-fare-calendar/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "air-manage-reservation",
+    "basePath": "/air/manage-reservation/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "air-seat",
+    "basePath": "/air/seat/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+     {
+      "id": "air-seat-select-seats",
+      "basePath": "/air/seat/select-seats",
+      "searchToken": true,
+      "params": [
+		          { "key": "searchToken", "value": "", "position": "first" },
+                  { "key": "clk", "value": "", "position": "default" }
+
+                ]
+    },		
+  {
+    "id": "air-upgrade",
+    "basePath": "/air/upgrade/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "car-booking",
+    "basePath": "/car/booking/",
+    "searchToken": false,
+    "params": [
+                  { "key": "clk", "value": "", "position": "default" },
+                  { "key": "pickUpLocation", "value": "LAX", "position": "default" },
+                  { "key": "pickUpTime", "value": "11:00",  "position": "default" },
+                  { "key": "pickUpDate", "value": "2024-03-15", "position": "default" },
+                  { "key": "returnDate", "value": "2024-03-30", "position": "default" },
+                  { "key": "returnLocation", "value": "LAX", "position": "default" },
+                  { "key": "returnTime", "value": "15:30", "position": "default" },
+                  { "key": "vendors", "value": "HERTZ", "position": "default" },
+                  { "key": "carType", "value": "ECONOMY", "position": "default" },
+                  { "key": "carCode-0", "value": "2119555", "position": "default" }
+                ]
+  },
+  {
+    "id": "car-manage-reservation",
+    "basePath": "/car/manage-reservation/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "chase-offer-email",
+    "basePath": "/chase/offer/email",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "customer-experience-enhancements",
+    "basePath": "/customer-experience-enhancements/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "denveroffer",
+    "basePath": "/denveroffer/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights",
+    "basePath": "/en/flights",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights-99orless",
+    "basePath": "/en/flights/99orless",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights-flight-deals",
+    "basePath": "/en/flights/flight-deals",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights-flights-to-beach-bound-destinations",
+    "basePath": "/en/flights/flights-to-beach-bound-destinations",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights-flights-to-snow-bound-destinations",
+    "basePath": "/en/flights/flights-to-snow-bound-destinations",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights-spring-break-deals",
+    "basePath": "/en/flights/spring-break-deals",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "en-flights-wanna-go-wednesday",
+    "basePath": "/en/flights/wanna-go-wednesday",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "find-best-flight-deals",
+    "basePath": "/find-best-flight-deals/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "gift-card",
+    "basePath": "/gift-card/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "html-offers-cos_sale_NonstopConnect_",
+    "basePath": "/html/offers/cos_sale_NonstopConnect_",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "html-offers-interisland_NonstopConnect_",
+    "basePath": "/html/offers/interisland_NonstopConnect_",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "html-offers-local_sale_NonstopConnect_",
+    "basePath": "/html/offers/local_sale_NonstopConnect_",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "html-offers-nationwide_sale_NonstopConnect_",
+    "basePath": "/html/offers/nationwide_sale_NonstopConnect_",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "html-offers-WannaGoWednesday.html",
+    "basePath": "/html/offers/WannaGoWednesday.html",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-enroll",
+    "basePath": "/loyalty/enroll/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount",
+    "basePath": "/loyalty/myaccount/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount-payment",
+    "basePath": "/loyalty/myaccount/payment",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount-profile-personal",
+    "basePath": "/loyalty/myaccount/profile/personal",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount-rapid-rewards",
+    "basePath": "/loyalty/myaccount/rapid-rewards",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount-trips-past",
+    "basePath": "/loyalty/myaccount/trips/past",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount-trips-saved",
+    "basePath": "/loyalty/myaccount/trips/saved",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "loyalty-myaccount-trips-upcoming",
+    "basePath": "/loyalty/myaccount/trips/upcoming",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "mobile-app",
+    "basePath": "/mobile-app/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "NewMemberAcquisition",
+    "basePath": "/NewMemberAcquisition/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+   {
       "id": "priority-boarding",
-      "label": "priority boarding",
       "basePath": "/air/priority-boarding/",
       "searchToken": true,
       "params": [
-		          { "key": "searchToken", "value": "<%=ctx.ccsAdobeEmailFulfillment.emailMessages.emailMessage.airPurchase.other.seatLink%>", "dynamic": true, "encode": false, "position": "first" },
-                  { "key": "clk", "value": "PRIORITYBOARDING", "dynamic": false, "encode": true, "position": "default" }
+		          { "key": "searchToken", "value": "", "position": "first" },
+                  { "key": "clk", "value": "", "position": "default" }
 
                 ]
-    },
-    {
-  "id": "my-account",
-  "label": "My account",
-  "basePath": "/loyalty/myaccount/index.html",
-  "searchToken": false,
-  "params": [
-    { "key": "clk", "value": "", "dynamic": false, "encode": true, "position": "default" }
-  ]
-} 
-  ]
+    },					  
+  {
+    "id": "rapid-rewards-cash-plus-points",
+    "basePath": "/rapid-rewards/cash-plus-points/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },			  
+  {
+    "id": "special-offers-car-offers",
+    "basePath": "/special-offers/car-offers/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "special-offers-featured-offers",
+    "basePath": "/special-offers/featured-offers/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "special-offers-flight-deals",
+    "basePath": "/special-offers/flight-deals/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "special-offers-loyalty-offers",
+    "basePath": "/special-offers/loyalty-offers/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "travel-funds",
+    "basePath": "/travel-funds/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "upgraded-boarding",
+    "basePath": "/upgraded-boarding/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  },
+  {
+    "id": "vacations",
+    "basePath": "/vacations/",
+    "searchToken": false,
+    "params": [
+      {
+        "key": "clk",
+        "value": "",
+        "position": "default"
+      }
+    ]
+  }
+]
 }
