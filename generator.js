@@ -291,4 +291,3 @@ fetch("branchConfig.json")
     };
 
   });
-</script>
