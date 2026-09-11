@@ -134,7 +134,7 @@ fetch("branchConfig.json")
       maxOptions: 200,
     });
 
-    // ─── UI event handlers ─────────────────────────────────────────────────
+    // ───     UI event handlers ─────────────────────────────────────────────────
 
     function getSelectedLink() {
       let selectedId = tomSelect.getValue();
